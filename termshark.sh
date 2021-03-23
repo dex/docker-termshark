@@ -10,11 +10,11 @@ pcapdir=$tmpdir/termshark/pcaps
 
 #termshark $*
 if [ -S /var/run/docker.sock ]; then
-	docker run --name termshark-$$ -it --net host --privileged docker-termshark $*
+	docker run --name termshark-$$ -it --net host --privileged dex0827/termshark $*
 	docker cp termshark-$$:/root/.cache $tmpdir
 	docker rm termshark-$$
 elif [ -S /run/k3s/containerd/containerd.sock ]; then
-	ctr run -t --net-host --privileged docker.io/library/docker-termshark:latest termshark-$$ termshark $*
+	ctr run -t --net-host --privileged docker.io/dex0827/termshark:latest termshark-$$ termshark $*
 	mkdir /tmp/termshark-$$-mnt
 	eval $(ctr snapshot mount /tmp/termshark-$$-mnt termshark-$$)
 	cp -r /tmp/termshark-$$-mnt/root/.cache $tmpdir
