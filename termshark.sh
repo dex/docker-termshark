@@ -9,7 +9,7 @@ export XDG_CACHE_HOME=$tmpdir # this will create per-process cache folder
 pcapdir=$tmpdir/termshark/pcaps
 
 #termshark $*
-docker run --name termshark-$$ -it --net host --privileged --env TERM=xterm-256color docker-termshark $*
+docker run --name termshark-$$ -it --net host --privileged docker-termshark $*
 docker cp termshark-$$:/root/.cache $tmpdir
 docker rm termshark-$$
 
