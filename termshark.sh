@@ -19,6 +19,7 @@ elif [ -S /run/k3s/containerd/containerd.sock ]; then
 	cp -r /tmp/termshark-$$-mnt/root/.cache $tmpdir
 	umount /tmp/termshark-$$-mnt
 	rmdir /tmp/termshark-$$-mnt
+	ctr container rm termshark-$$
 else
 	termshark $*
 fi
